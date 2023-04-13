@@ -123,7 +123,7 @@ while True:
             if token_symbol != "WETH" and token_symbol != "USDT" and token_symbol != "UNI-V2" and token_symbol != "GETH" and token_symbol != "USDC":
                 swap_id = swap['id']
                 tx_hash = swap_info['pair_address']
-                timestamp = datetime.datetime.fromtimestamp(int(swap['timestamp']))- datetime.timedelta(hours=2)
+                timestamp = datetime.datetime.fromtimestamp(int(swap['timestamp']))
                 timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
                 wallet_sender = swap['to']
                 eth_in = float(swap['amount0In'])
