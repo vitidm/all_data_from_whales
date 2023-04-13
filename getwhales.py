@@ -119,25 +119,28 @@ while True:
             # if swap['to'] == UNISWAP_V2_ROUTER_ADDRESS:
                 # if float(swap['amount0Out']) > 0.1:
             swap_info = parse_swap_id(swap['id'])
-            token_symbol, token_name, token_address = get_tx_hash_info(swap_info['pair_address'])
-            if token_symbol != "WETH" and token_symbol != "USDT" and token_symbol != "UNI-V2" and token_symbol != "GETH" and token_symbol != "USDC":
-                swap_id = swap['id']
-                tx_hash = swap_info['pair_address']
-                timestamp = datetime.datetime.fromtimestamp(int(swap['timestamp']))
-                timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
-                wallet_sender = swap['to']
-                eth_in = float(swap['amount0In'])
-                tokens_out = swap['amount0Out']
-                if eth_in >= 0.3 and eth_in <= 20.0:
-                    print(swap)
-                    print(f"Swap ID: {swap_id}")
-                    print(f"  Tx Hash: {tx_hash}")
-                    print(f"  TOKEN INFO: \n  - Token Symbol: {token_symbol}\n  - Token Name: {token_name}\n  - Token Address: {token_address}")
-                    print(f"  Timestamp: {timestamp}")
-                    print(f"  Wallet: {wallet_sender}")
-                    print(f"  Amount ETH In: {eth_in}")
-                    print(f"  Amount Tokens Out: {tokens_out}")
-                    print()
-                    insert_sql_info(timestamp, wallet_sender, eth_in, tx_hash, token_name, token_symbol, token_address)
+            try:
+                token_symbol, token_name, token_address = get_tx_hash_info(swap_info['pair_address'])
+                if token_symbol != "WETH" and token_symbol != "USDT" and token_symbol != "UNI-V2" and token_symbol != "GETH" and token_symbol != "USDC":
+                    swap_id = swap['id']
+                    tx_hash = swap_info['pair_address']
+                    timestamp = datetime.datetime.fromtimestamp(int(swap['timestamp']))
+                    timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+                    wallet_sender = swap['to']
+                    eth_in = float(swap['amount0In'])
+                    tokens_out = swap['amount0Out']
+                    if eth_in >= 0.3 and eth_in <= 20.0:
+                        print(swap)
+                        print(f"Swap ID: {swap_id}")
+                        print(f"  Tx Hash: {tx_hash}")
+                        print(f"  TOKEN INFO: \n  - Token Symbol: {token_symbol}\n  - Token Name: {token_name}\n  - Token Address: {token_address}")
+                        print(f"  Timestamp: {timestamp}")
+                        print(f"  Wallet: {wallet_sender}")
+                        print(f"  Amount ETH In: {eth_in}")
+                        print(f"  Amount Tokens Out: {tokens_out}")
+                        print()
+                        insert_sql_info(timestamp, wallet_sender, eth_in, tx_hash, token_name, token_symbol, token_address)
+            except Exception:
+                continue
 
     time.sleep(wait_time)
