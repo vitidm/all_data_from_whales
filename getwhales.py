@@ -239,7 +239,7 @@ while True:
                     wallet_sender = swap['to']
                     eth_in = float(swap['amount0In'])
                     tokens_out = swap['amount0Out']
-                    if eth_in >= 0.8 and eth_in <= 20.0:
+                    if eth_in >= 0.3 and eth_in <= 20.0:
                         print(swap)
                         print(f"Swap ID: {swap_id}")
                         print(f"  Tx Hash: {tx_hash}")
@@ -270,7 +270,7 @@ while True:
                     wallet_sender = swap['to']
                     eth_in = float(swap['amount0In'])
                     tokens_out = swap['amount0Out']
-                    if eth_in >= 0.8 and eth_in <= 20.0:
+                    if eth_in >= 0.3 and eth_in <= 20.0:
                         print(swap)
                         print(f"Swap ID: {swap_id}")
                         print(f"  Tx Hash: {tx_hash}")
